@@ -46,15 +46,20 @@ describe("Categories", () => {
   });
 
   it("Selecting a new category should deselect the old one", () => {
-    /**
-     * Time for you to write your first test!!
-     *
-     * We will give you a couple of steps here, this does not mean that every step is 1 line of code!
-     */
-    // 1. Check that no category is selected
-    // 2. Click a category
-    // 3. Check that that category is selected
-    // 4. Click a different category
-    // 5. Check that only the new category is selected
+    // Check that no category is selected
+    cy.get('[data-selected="true"]').should("not.exist");
+
+    // Click a category
+    cy.get('[data-elementid="electronics"]').click();
+
+    // Check that that category is selected
+    cy.get('[data-elementid="electronics"]').should("have.attr", "data-selected", "true");
+
+    // Click a different category
+    cy.get('[data-elementid="clothing"]').click();
+
+    // Check that only the new category is selected
+    cy.get('[data-elementid="electronics"]').should("have.attr", "data-selected", "false");
+    cy.get('[data-elementid="clothing"]').should("have.attr", "data-selected", "true");
   });
 });
